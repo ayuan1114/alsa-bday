@@ -16,12 +16,15 @@ const ITEMS = [
   { id: 10, name: "🌟 Golden Star", rarity: "legendary", emoji: "🌟" },
 ]
 
+const UNBOXING_DURATION = 3 // seconds
+
 function UnboxingPage() {
   const [inventory, setInventory] = useState({})
   const [showInventory, setShowInventory] = useState(false)
   const [isUnboxing, setIsUnboxing] = useState(false)
   const [currentItem, setCurrentItem] = useState(null)
   const [showResult, setShowResult] = useState(false)
+  const [miniExplosionPositions, setMiniExplosionPositions] = useState([])
 
   // Load inventory from localStorage
   useEffect(() => {
@@ -66,6 +69,14 @@ function UnboxingPage() {
   const handleUnbox = () => {
     if (isUnboxing) return
 
+    // Generate random positions for mini explosions
+    setMiniExplosionPositions([
+      { x: (Math.random() - 0.5) * 200, y: (Math.random() - 0.5) * 200 },
+      { x: (Math.random() - 0.5) * 200, y: (Math.random() - 0.5) * 200 },
+      { x: (Math.random() - 0.5) * 200, y: (Math.random() - 0.5) * 200 },
+      { x: (Math.random() - 0.5) * 200, y: (Math.random() - 0.5) * 200 },
+    ])
+
     setIsUnboxing(true)
     setShowResult(false)
     setCurrentItem(null)
@@ -85,7 +96,7 @@ function UnboxingPage() {
         setShowResult(true)
         setIsUnboxing(false)
       }, 500)
-    }, 2000)
+    }, 3000)
   }
 
   const getTotalItems = () => {
@@ -198,19 +209,131 @@ function UnboxingPage() {
                 <motion.div
                   className="box-opening"
                   animate={{
-                    scale: [1, 1.2, 1.5, 2],
-                    rotate: [0, 180, 360, 720],
-                    opacity: [1, 1, 1, 0],
+                    // Shake 3 times while growing
+                    rotate: [2, -15, -2, 0, 0, -2, 15, 2, 0, 0, 2, -15, -2, 0, 0, -2, 12, -15, 10, 0],
+                    scale: [1, 1.05, 1.05, 1.05, 1.05, 1.05, 1.1, 1.1, 1.1, 1.1, 1.1, 1.15, 1.15, 1.15, 1.15, 1.15, 1.2, 1.25, 1.3, 1.35],
+                    y: [0, -5, 0, -5, 0, -10, 0, -15],
                   }}
-                  transition={{ duration: 2 }}
+                  transition={{ 
+                    duration: UNBOXING_DURATION,
+                    times: [0, 0.15, 0.25, 0.4, 0.5, 0.65, 0.75, 0.9],
+                    ease: "easeInOut"
+                  }}
                 >
                   🎁
+                </motion.div>
+                
+                {/* Mini explosion - First shake */}
+                <motion.div
+                  className="mini-pop"
+                  initial={{ 
+                    scale: 0, 
+                    opacity: 0,
+                    x: miniExplosionPositions[0]?.x || 0,
+                    y: miniExplosionPositions[0]?.y || 0
+                  }}
+                  animate={{ 
+                    scale: [0, 1.5, 0],
+                    opacity: [0, 0.8, 0]
+                  }}
+                  transition={{ 
+                    duration: 0.3,
+                    delay: UNBOXING_DURATION * 0.05,
+                    ease: "easeOut"
+                  }}
+                >
+                  💥
+                </motion.div>
+                
+                {/* Mini explosion - Second shake */}
+                <motion.div
+                  className="mini-pop"
+                  initial={{ 
+                    scale: 0, 
+                    opacity: 0,
+                    x: miniExplosionPositions[1]?.x || 0,
+                    y: miniExplosionPositions[1]?.y || 0
+                  }}
+                  animate={{ 
+                    scale: [0, 1.6, 0],
+                    opacity: [0, 0.8, 0]
+                  }}
+                  transition={{ 
+                    duration: 0.3,
+                    delay: UNBOXING_DURATION * 0.30,
+                    ease: "easeOut"
+                  }}
+                >
+                  💥
+                </motion.div>
+                
+                {/* Mini explosion - Third shake */}
+                <motion.div
+                  className="mini-pop"
+                  initial={{ 
+                    scale: 0, 
+                    opacity: 0,
+                    x: miniExplosionPositions[2]?.x || 0,
+                    y: miniExplosionPositions[2]?.y || 0
+                  }}
+                  animate={{ 
+                    scale: [0, 1.7, 0],
+                    opacity: [0, 0.8, 0]
+                  }}
+                  transition={{ 
+                    duration: 0.3,
+                    delay: UNBOXING_DURATION * 0.55,
+                    ease: "easeOut"
+                  }}
+                >
+                  💥
+                </motion.div>
+                  
+                {/* Mini explosion - Fourth shake */}
+                <motion.div
+                  className="mini-pop"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ 
+                    scale: [0, 1.8, 0],
+                    opacity: [0, 0.8, 0],
+                    x: miniExplosionPositions[3]?.x || 0,
+                    y: miniExplosionPositions[3]?.y || 0
+                  }}
+                  transition={{ 
+                    duration: 0.3,
+                    delay: UNBOXING_DURATION * 0.8,
+                    ease: "easeOut"
+                  }}
+                >
+                  💥
+                </motion.div>
+                
+
+                {/* Big explosion at the end */}
+                <motion.div
+                  className="box-pop"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ 
+                    scale: [0, 3, 0],
+                    opacity: [0, 1, 0],
+                    rotate: [0, 180, 360]
+                  }}
+                  transition={{ 
+                    duration: 0.4,
+                    delay: UNBOXING_DURATION,
+                    ease: "easeOut"
+                  }}
+                >
+                  💥
                 </motion.div>
                 <motion.div
                   className="reveal-rays"
                   initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 3, opacity: [0, 1, 0] }}
-                  transition={{ duration: 2 }}
+                  animate={{ scale: [0, 4], opacity: [0, 0.8, 0] }}
+                  transition={{ 
+                    duration: 0.6,
+                    delay: UNBOXING_DURATION,
+                  }}
                 >
                   ✨
                 </motion.div>

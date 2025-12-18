@@ -4,11 +4,20 @@ import { useState } from 'react'
 import './HomePage.css'
 
 function HomePage() {
-  const [notes] = useState([
-    { id: 1, title: "Why I Love You", content: "You can edit this with your personal message..." },
-    { id: 2, title: "Our Favorite Memories", content: "Add your special memories here..." },
-    { id: 3, title: "What Makes You Special", content: "Write what makes her special to you..." },
-  ])
+  const [message] = useState(`Dear [Her Name],
+
+Happy Birthday to the most wonderful person in my life! 🎂💝
+
+I wanted to take a moment to tell you how much you mean to me...
+
+[Write your heartfelt message here. Share your feelings, memories, and what makes her special to you.]
+
+I hope your day is filled with joy, laughter, and all the happiness you deserve.
+
+With all my love,
+[Your Name]
+
+P.S. I have a special surprise for you below! 🎁`)
 
   return (
     <div className="home-page">
@@ -56,24 +65,25 @@ function HomePage() {
         </motion.div>
 
         <motion.div
-          className="notes-container"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          className="notebook-container"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 1 }}
         >
-          {notes.map((note, index) => (
-            <motion.div
-              key={note.id}
-              className="note-card"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1 + index * 0.2, duration: 0.5 }}
-              whileHover={{ scale: 1.05, rotate: index % 2 === 0 ? 2 : -2 }}
-            >
-              <h3 className="note-title">{note.title}</h3>
-              <p className="note-content">{note.content}</p>
-            </motion.div>
-          ))}
+          <motion.div
+            className="notebook-page"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+            whileHover={{ scale: 1.02 }}
+          >
+            <div className="notebook-lines">
+              <div className="notebook-header">
+                <div className="date-label">December 29, 2025 ✨</div>
+              </div>
+              <pre className="message-content">{message}</pre>
+            </div>
+          </motion.div>
         </motion.div>
 
         <motion.div
