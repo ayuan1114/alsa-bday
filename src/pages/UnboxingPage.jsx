@@ -4,17 +4,17 @@ import { useState, useEffect } from 'react'
 import './UnboxingPage.css'
 
 // Asset paths from public folder
-const aaronSprite = '/assets/aaron_sprite.png'
-const aaronWizSprite = '/assets/aaron_wiz_sprite.png'
-const alsaBubuSprite = '/assets/alsa_bubu_sprite.png'
-const alsaSprite = '/assets/alsa_sprite.png'
-const alsaWitchSprite = '/assets/alsa_witch_sprite.png'
-const helloKittyPjSprite = '/assets/hello_kitty_pj_sprite.png'
-const helloKittySprite = '/assets/hello_kitty_sprite.png'
-const lickitungShiny = '/assets/lickitung_shiny.png'
-const lickitungSprite = '/assets/lickitung_sprite.png'
-const stitchSprite = '/assets/stitch_sprite.png'
-const alsaBox = '/assets/alsa_box.png'
+const aaronSprite = './assets/aaron_sprite.png'
+const aaronWizSprite = './assets/aaron_wiz_sprite.png'
+const alsaBubuSprite = './assets/alsa_bubu_sprite.png'
+const alsaSprite = './assets/alsa_sprite.png'
+const alsaWitchSprite = './assets/alsa_witch_sprite.png'
+const helloKittyPjSprite = './assets/hello_kitty_pj_sprite.png'
+const helloKittySprite = './assets/hello_kitty_sprite.png'
+const lickitungShiny = './assets/lickitung_shiny.png'
+const lickitungSprite = './assets/lickitung_sprite.png'
+const stitchSprite = './assets/stitch_sprite.png'
+const alsaBox = './assets/alsa_box.png'
 const ITEMS = [
   { id: 1, name: "Hello Kitty", rarity: "common", image: helloKittySprite },
   { id: 2, name: "Stitch", rarity: "common", image: stitchSprite },
