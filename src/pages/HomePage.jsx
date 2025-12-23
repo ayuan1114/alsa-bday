@@ -4,7 +4,7 @@ import { useState } from 'react'
 import './HomePage.css'
 
 function HomePage() {
-  const [message] = useState(`Dear [Her Name],
+  const [message] = useState(`Dear Allyssa,
 
 Happy Birthday to the most wonderful person in my life! 🎂💝
 
@@ -15,7 +15,7 @@ I wanted to take a moment to tell you how much you mean to me...
 I hope your day is filled with joy, laughter, and all the happiness you deserve.
 
 With all my love,
-[Your Name]
+Aaron
 
 P.S. I have a special surprise for you below! 🎁`)
 
@@ -52,7 +52,7 @@ P.S. I have a special surprise for you below! 🎁`)
           transition={{ duration: 0.8 }}
         >
           <h1 className="title">
-            🎂 Happy Birthday! 🎂
+            Happy Birthday!
           </h1>
           <motion.p
             className="subtitle"
@@ -60,7 +60,7 @@ P.S. I have a special surprise for you below! 🎁`)
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
           >
-            To the most amazing person in my life ✨
+            ✨ To the most amazing person in my life ✨
           </motion.p>
         </motion.div>
 
@@ -79,7 +79,7 @@ P.S. I have a special surprise for you below! 🎁`)
           >
             <div className="notebook-lines">
               <div className="notebook-header">
-                <div className="date-label">December 29, 2025 ✨</div>
+                <div className="date-label">December 29, 2025 🎂</div>
               </div>
               <pre className="message-content">{message}</pre>
             </div>

@@ -3,17 +3,29 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import './UnboxingPage.css'
 
+// Asset paths from public folder
+const aaronSprite = '/assets/aaron_sprite.png'
+const aaronWizSprite = '/assets/aaron_wiz_sprite.png'
+const alsaBubuSprite = '/assets/alsa_bubu_sprite.png'
+const alsaSprite = '/assets/alsa_sprite.png'
+const alsaWitchSprite = '/assets/alsa_witch_sprite.png'
+const helloKittyPjSprite = '/assets/hello_kitty_pj_sprite.png'
+const helloKittySprite = '/assets/hello_kitty_sprite.png'
+const lickitungShiny = '/assets/lickitung_shiny.png'
+const lickitungSprite = '/assets/lickitung_sprite.png'
+const stitchSprite = '/assets/stitch_sprite.png'
+const alsaBox = '/assets/alsa_box.png'
 const ITEMS = [
-  { id: 1, name: "💝 Love Letter", rarity: "common", emoji: "💝" },
-  { id: 2, name: "🌸 Flower Bouquet", rarity: "common", emoji: "🌸" },
-  { id: 3, name: "🍰 Birthday Cake", rarity: "common", emoji: "🍰" },
-  { id: 4, name: "🎀 Cute Ribbon", rarity: "common", emoji: "🎀" },
-  { id: 5, name: "✨ Sparkles", rarity: "rare", emoji: "✨" },
-  { id: 6, name: "🦄 Unicorn", rarity: "rare", emoji: "🦄" },
-  { id: 7, name: "🌈 Rainbow", rarity: "rare", emoji: "🌈" },
-  { id: 8, name: "💎 Diamond", rarity: "epic", emoji: "💎" },
-  { id: 9, name: "👑 Crown", rarity: "epic", emoji: "👑" },
-  { id: 10, name: "🌟 Golden Star", rarity: "legendary", emoji: "🌟" },
+  { id: 1, name: "Hello Kitty", rarity: "common", image: helloKittySprite },
+  { id: 2, name: "Stitch", rarity: "common", image: stitchSprite },
+  { id: 3, name: "Lickitung", rarity: "common", image: lickitungSprite },
+  { id: 4, name: "Tushy", rarity: "rare", image: aaronSprite },
+  { id: 5, name: "Allyssa", rarity: "rare", image: alsaSprite },
+  { id: 6, name: "PJ Hello Kitty", rarity: "rare", image: helloKittyPjSprite },
+  { id: 7, name: "Shiny Lickitung", rarity: "rare", image: lickitungShiny },
+  { id: 8, name: "Wizard Tushy", rarity: "epic", image: aaronWizSprite },
+  { id: 9, name: "Witch Allyssa", rarity: "epic", image: alsaWitchSprite },
+  { id: 10, name: "Allybubu", rarity: "legendary", image: alsaBubuSprite },
 ]
 
 const UNBOXING_DURATION = 3 // seconds
@@ -185,7 +197,7 @@ function UnboxingPage() {
                     ease: "easeInOut"
                   }}
                 >
-                  🎁
+                  <img src={alsaBox} alt="Mystery Box" style={{ width: '200px', height: '200px', objectFit: 'contain' }} />
                 </motion.div>
                 <motion.button
                   className="open-box-button"
@@ -216,11 +228,11 @@ function UnboxingPage() {
                   }}
                   transition={{ 
                     duration: UNBOXING_DURATION,
-                    times: [0, 0.15, 0.25, 0.4, 0.5, 0.65, 0.75, 0.9],
+                    times: [0, 0.15, 0.25, 0.4, 0.5, 0.65, 0.75, 0.3],
                     ease: "easeInOut"
                   }}
                 >
-                  🎁
+                  <img src={alsaBox} alt="Opening Box" style={{ width: '150px', height: '150px', objectFit: 'contain' }} />
                 </motion.div>
                 
                 {/* Mini explosion - First shake */}
@@ -372,7 +384,9 @@ function UnboxingPage() {
                   }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 >
-                  <div className="item-emoji">{currentItem.emoji}</div>
+                  <div className="item-emoji">
+                    <img src={currentItem.image} alt={currentItem.name} style={{ width: '150px', height: '200px', objectFit: 'contain' }} />
+                  </div>
                   <div className="item-name">{currentItem.name}</div>
                   <div 
                     className="item-rarity"
@@ -449,7 +463,13 @@ function UnboxingPage() {
                       }}
                       whileHover={count > 0 ? { scale: 1.05 } : {}}
                     >
-                      <div className="item-icon">{count > 0 ? item.emoji : '❓'}</div>
+                      <div className="item-icon">
+                        {count > 0 ? (
+                          <img src={item.image} alt={item.name} style={{ width: '60px', height: '60px', objectFit: 'contain' }} />
+                        ) : (
+                          '❓'
+                        )}
+                      </div>
                       <div className="item-info">
                         <div className="item-label">{count > 0 ? item.name : '???'}</div>
                         {count > 0 && (

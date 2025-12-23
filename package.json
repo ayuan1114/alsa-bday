@@ -6,9 +6,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:prod": "vite build --mode production",
+    "build:dev": "vite build --mode development",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "preview:docs": "vite preview --outDir docs",
+    "clean": "node -e \"require('fs').rmSync('docs', { recursive: true, force: true })\"",
+    "clean:build": "npm run clean && npm run build",
+    "start": "vite preview --outDir docs",
+    "predeploy": "npm run build:prod",
+    "deploy": "gh-pages -d docs"
   },
   "dependencies": {
     "framer-motion": "^10.16.16",
